@@ -138,6 +138,7 @@
         },
         {
             "command_string": "python assemble.py",
+            "version": "0.0.0",
             "dependencies": [],
             "description": "A protocol for the assembly of constructs for Kunkel Mutagenesis.",
             "inputs": {
@@ -531,6 +532,7 @@
         },
         {
             "command_string": "python transform.py",
+            "version": "0.0.0",
             "dependencies": [],
             "description": "A protocol for the transformation step in Kunkel Mutagenesis.",
             "inputs": {
