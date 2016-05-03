@@ -3,7 +3,6 @@ from autoprotocol.instruction import Instruction
 from assemble import assemble
 from sequence import sequence
 from transform import transform
-from plasmidprep import plasmidprep
 from autoprotocol.container import WellGroup
 from mutant import Mutant
 from collections import OrderedDict
