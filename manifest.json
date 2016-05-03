@@ -2,8 +2,9 @@
   "version": "1.1.2",
   "protocols": [
     {
-      "name": "KunkelSiegel",
+      "name": "Kunkel",
       "description": "A protocol for the assembly of constructs for Kunkel Mutagenesis.",
+      "version": "0.0.0",
       "dependencies": [],
       "command_string": "python kunkel_full.py",
       "inputs": {

@@ -174,4 +174,4 @@ def kunkel_full(protocol, params):
 
 if __name__ == '__main__':
     from autoprotocol.harness import run
-    run(kunkel_full, 'KunkelSiegel')
+    run(kunkel_full, 'Kunkel')
