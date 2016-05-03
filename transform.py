@@ -16,13 +16,6 @@ def transform(protocol, params):
     num_colonies = params['num_colonies']
     mm_mult = 1.3
 
-    # provision SOC medium
-    soc_vol = num_constructs * 50 * mm_mult
-    num_soc = int(math.ceil(float(soc_vol)/1800))
-    soc_medium = [provision_to_tube(protocol, "soc_medium_%d" % (i+1),
-                                    "micro-2.0", "rs17tpdy56hfar", soc_vol/num_soc).set_volume(Unit(0.9 * (soc_vol/num_soc), "microliter"))
-                  for i in range(0, num_soc)]
-
     transformation_plate = protocol.ref("transformation_plate", None, "96-pcr", discard=True)
     protocol.incubate(transformation_plate, "cold_20", "10:minute")
 
@@ -44,7 +37,7 @@ def transform(protocol, params):
     protocol.seal(transformation_plate)
     protocol.incubate(transformation_plate, "cold_4", "20:minute", shaking=False, co2=0)
     protocol.unseal(transformation_plate)
-    protocol.transfer(soc_medium, transformation_wells, "50:microliter", one_source=True)
+    protocol.dispense_full_plate( transformation_plate, 'soc', '50:microliter' )
     protocol.seal(transformation_plate)
     protocol.incubate(transformation_plate, "warm_37", "10:minute", shaking=True)
     protocol.unseal(transformation_plate)
