@@ -1,7 +1,6 @@
 from autoprotocol.protocol import Protocol
 from autoprotocol.instruction import Instruction
 from assemble import assemble
-from sequence import sequence
 from transform import transform
 from autoprotocol.container import WellGroup
 from mutant import Mutant
