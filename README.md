@@ -12,7 +12,7 @@ To run the protocol, first install the Autoprotocol package and the Transcriptic
 
 ```bash
 pip install autoprotocol transcriptic
-```. 
+```
 
 You can preview the Kunkel protocol with 
 
