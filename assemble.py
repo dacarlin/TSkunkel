@@ -27,12 +27,14 @@ def assemble(protocol, params):
     num_rxts_plus = 3
 
     # provision water
-    water = [provision_to_tube(protocol, "water%s" % (i + 1), "micro-2.0", "rs17gmh5wafm5p", 1900)
-             for i in range(int(math.ceil(num_constructs/float(9.0))))
-            ]
-
-    for w in water:
-        w.set_volume('1800:microliter')
+    water = protocol.ref( 'water', cont_type='96-deep', discard=True )
+    protocol.dispense_full_plate( water, 'water', '1000:microliter' )
+    # water = [provision_to_tube(protocol, "water%s" % (i + 1), "micro-2.0", "rs17gmh5wafm5p", 1900)
+    #          for i in range(int(math.ceil(num_constructs/float(9.0))))
+    #         ]
+    #
+    # for w in water:
+    #     w.set_volume('1800:microliter')
 
     # provision atp for entire protocol
     atp_reagents = {'atp': {"resource_id": 'rs16pccshb6cb4',
@@ -90,7 +92,7 @@ def assemble(protocol, params):
     diluted_oligo_plate = protocol.ref("dilute_oligo_plate", None, "96-flat", discard=True)
     diluted_oligo_wells = diluted_oligo_plate.wells_from(0, num_constructs)
 
-    protocol.transfer(water,
+    protocol.transfer(water.all_wells(),
                       diluted_oligo_wells,
                       "200:microliter",
                       disposal_vol="0:microliter",

@@ -140,7 +140,7 @@
             "command_string": "python assemble.py",
             "version": "0.0.0",
             "dependencies": [],
-            "description": "A protocol for the assembly of constructs for Kunkel Mutagenesis.",
+            "description": "Part 1 of Kunkel mutagensis protocol",
             "inputs": {
                 "constructs": {
                     "inputs": {
@@ -534,7 +534,7 @@
             "command_string": "python transform.py",
             "version": "0.0.0",
             "dependencies": [],
-            "description": "A protocol for the transformation step in Kunkel Mutagenesis.",
+            "description": "Part 2 of Kunkel mutagensis protocol",
             "inputs": {
                 "constructs": {
                     "label": "Samples to Transform and Grow using Zymo 10B Competent Cells",
@@ -716,5 +716,5 @@
             }
         }
     ],
-    "version": "1.1.2"
+    "version": "0.0.0"
 }
