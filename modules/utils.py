@@ -22,7 +22,7 @@ def provision_to_tube(protocol, name, tube, resource_id, volume, discard=True, s
     '''
     assert isinstance(volume, (Unit, int, float)), "Volume must be of type int, float or Unit."
     if isinstance(volume, Unit):
-        volume = volume.value
+        volume = volume.magnitude
     if storage:
         dest = protocol.ref(name, None, tube, storage=storage).well(0)
     else:
@@ -64,9 +64,9 @@ def thermocycle_ramp(start_temp, end_temp, total_duration, step_duration):
                                                                                          " must be specified using the"
                                                                                          " same unit of time.")
     thermocycle_steps = []
-    start_temp = Unit.fromstring(start_temp).value
-    num_steps = int(Unit.fromstring(total_duration).value // Unit.fromstring(step_duration).value)
-    step_size = (Unit.fromstring(end_temp).value - start_temp) // num_steps
+    start_temp = Unit.fromstring(start_temp).magnitude
+    num_steps = int(Unit.fromstring(total_duration).magnitude // Unit.fromstring(step_duration).magnitude)
+    step_size = (Unit.fromstring(end_temp).magnitude - start_temp) // num_steps
     for i in xrange(0, num_steps):
         thermocycle_steps.append({
             "temperature": "%d:celsius" % (start_temp + i * step_size), "duration": step_duration

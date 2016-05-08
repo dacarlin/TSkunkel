@@ -76,7 +76,7 @@
                             "type": "csv"
                         },
                         "num_colonies": {
-                            "default": "3",
+                            "default": 3,
                             "description": "Number of colonies to pick per mutant for growth and sequencing",
                             "label": "Number of colonies to pick",
                             "type": "integer"
