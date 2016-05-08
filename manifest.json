@@ -8,12 +8,12 @@
             "description": "Kunkel mutagensis (requires aliquot of prepped ssDNA)",
             "inputs": {
                 "construct_setup": {
-                    "description": "Input parameters to assemble mutant constructs.",
+                    "description": "Input parameters",
                     "inputs": {
                         "growth_media": {
                             "default": "lb-broth-50ug-ml-kan",
-                            "description": "Antibiotic to add to growth media and agar for picked colonies.",
-                            "label": "Antibiotic Resistance",
+                            "description": "Antibiotic use for selection",
+                            "label": "Antibiotic",
                             "options": [
                                 {
                                     "name": "Ampicillin",
@@ -31,8 +31,8 @@
                             "type": "choice"
                         },
                         "mutant_upload": {
-                            "description": "Upload a CSV containing oligos to synthesize for mutant constructs.",
-                            "label": "Mutant Constructs",
+                            "description": "Upload a CSV",
+                            "label": "Mutant constructs",
                             "template": {
                                 "header": [
                                     "mutant_label",
@@ -46,40 +46,34 @@
                                     [
                                         "mutant_1",
                                         "oligo_1",
-                                        "atatatatatatatatatatatatatatatatatatatatatatatatatatatatat",
+                                        "atatatatatatatatatatatatatata",
                                         "25nm",
                                         "standard"
                                     ],
                                     [
                                         "mutant_1",
                                         "oligo_2",
-                                        "gggatatatatatatatatatatatatatatatatatatatatatatatatg",
+                                        "gggatatatatatatatatatatatatat",
                                         "25nm",
                                         "standard"
                                     ],
                                     [
                                         "mutant_1",
                                         "oligo_3",
-                                        "ggctgatatatatatatatatatatatatatatatatatatatatatatatatatatat",
+                                        "ggctgatatatatatatatatatatatata",
                                         "25nm",
                                         "standard"
                                     ],
                                     [
                                         "mutant_2",
                                         "oligo_3",
-                                        "ggctgatatatatatatatatatatatatatatatatatatatatatatatatatatat",
+                                        "ggctgatatatatatatatatatatatata",
                                         "25nm",
                                         "standard"
                                     ]
                                 ]
                             },
                             "type": "csv"
-                        },
-                        "num_colonies": {
-                            "default": 3,
-                            "description": "Number of colonies to pick per mutant for growth and sequencing",
-                            "label": "Number of colonies to pick",
-                            "type": "integer"
                         },
                         "ssDNA": {
                             "label": "ssDNA",
@@ -118,7 +112,6 @@
                                 "sequence": "agagagagagagagagagagagagagagagtt"
                             }
                         ],
-                        "num_colonies": 3,
                         "ssDNA": "ssDNA_source/0"
                     }
                 },
@@ -563,11 +556,6 @@
                         }
                     ],
                     "type": "choice"
-                },
-                "num_colonies": {
-                    "default": 3,
-                    "label": "Number of colonies to pick per construct.",
-                    "type": "integer"
                 }
             },
             "name": "Transform",

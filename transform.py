@@ -13,7 +13,6 @@ def transform(protocol, params):
         raise UserError('You can only transform aliquots from one common container.')
 
     # **** need to be able to check if plate is sealed to add run-chaining ****
-    num_colonies = params['num_colonies']
     mm_mult = 1.3
 
     transformation_plate = protocol.ref("transformation_plate", None, "96-pcr", discard=True)

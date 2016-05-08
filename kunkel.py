@@ -28,7 +28,7 @@ def scale_default(length, scale, label):
 
 def kunkel_full(protocol, params):
     growth_media = params["construct_setup"]['growth_media']
-    num_colonies = params["construct_setup"]['num_colonies']
+    #num_colonies = params["construct_setup"]['num_colonies']
     ssDNA = params["construct_setup"]['ssDNA']
     mutant_constructs = []
 
@@ -96,7 +96,7 @@ def kunkel_full(protocol, params):
     protocol.unseal(annealing_plate)
 
     transform_params = {
-        'num_colonies': num_colonies,
+        #'num_colonies': num_colonies,
         'growth_media': growth_media,
         'constructs': [mu.anneal_well for mu in mutant_constructs],
         'mutant_objs': mutant_constructs
