@@ -1,1 +1,5 @@
 .ipynb_checkpoints/
+.DS_Store
+Archive.zip
+csv.csv
+make_csv.py
