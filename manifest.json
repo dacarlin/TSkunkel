@@ -3,7 +3,7 @@
     "license": "MIT",
     "protocols": [
         {
-            "command_string": "python kunkel_full.py",
+            "command_string": "python kunkel.py",
             "dependencies": [],
             "description": "Kunkel mutagensis (requires aliquot of prepped ssDNA)",
             "inputs": {
