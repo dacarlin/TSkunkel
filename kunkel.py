@@ -77,7 +77,6 @@ def kunkel_full(protocol, params):
             mutant.add_oligos(oligo_collect[oligo["sequence"]]["destination"])
         mutant_constructs.append(mutant)
 
-
     oligos_to_synthesize = []
     for o in oligo_collect.keys():
         scale_default(len(oligo_collect[o]["sequence"]), oligo_collect[o]["scale"], oligo_collect[o]["destination"].container.name)

@@ -41,14 +41,19 @@ def transform(protocol, params):
     protocol.incubate(transformation_plate, "warm_37", "10:minute", shaking=True)
     protocol.unseal(transformation_plate)
 
+    # spread on agar plates
+
+    # kan "ki17rs7j799zc2"
+    # amp "ki17sbb845ssx9"
+    # specto "ki17sbb9r7jf98"
+    # cm "ki17urn3gg8tmj"
+    # "noAB" "ki17reefwqq3sq"
+
     agar_plates = []
     agar_wells = WellGroup([])
     for well in range(0, len(transformation_wells), 6):
-        agar_plate = ref_kit_container(protocol,
-                                       "agar-%s_%s" % (len(agar_plates), printdatetime(time=False)),
-                                       "6-flat",
-                                       return_agar_plates(6)[params['growth_media']],
-                                       discard=False, store='cold_4')
+        agar_name = "agar-%s_%s" % (len(agar_plates), printdatetime(time=False))
+        agar_plate = ref_kit_container(protocol, agar_name, "6-flat", "ki17rs7j799zc2", discard=False, store='cold_4')
         agar_plates.append(agar_plate)
         for i, w in enumerate(transformation_wells[well:well + 6]):
             protocol.spread(w, agar_plate.well(i), "100:microliter")
