@@ -1,0 +1,42 @@
+{
+  "refs": {
+    "ssDNA_source": {
+      "type": "micro-2.0", 
+      "store": "cold_20", 
+      "aliquots": {
+        "0": {
+          "volume": "1000:microliter"
+        }
+      }
+    }
+  }, 
+  "parameters": {
+    "construct_setup": {
+      "growth_media": "lb-broth-50ug-ml-kan", 
+      "ssDNA": "ssDNA_source/0", 
+      "mutant_upload": [
+        {
+          "oligo_label": "oligo_1", 
+          "scale": "25nm", 
+          "sequence": "agagagagagagagagagagagagagagag", 
+          "mutant_label": "mutant_1", 
+          "purification": "standard"
+        }, 
+        {
+          "oligo_label": "oligo_2", 
+          "scale": "25nm", 
+          "sequence": "agagagagagagagagagagagagagagagtt", 
+          "mutant_label": "mutant_1", 
+          "purification": "standard"
+        }, 
+        {
+          "oligo_label": "oligo_2", 
+          "scale": "25nm", 
+          "sequence": "agagagagagagagagagagagagagagagtt", 
+          "mutant_label": "mutant_2", 
+          "purification": "standard"
+        }
+      ]
+    }
+  }
+}
