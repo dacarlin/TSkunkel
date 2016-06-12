@@ -127,11 +127,11 @@
                     }
                 }
             },
-            "version": "0.0.0"
+            "version": "0.0.1"
         },
         {
             "command_string": "python assemble.py",
-            "version": "0.0.0",
+            "version": "0.0.1",
             "dependencies": [],
             "description": "Part 1 of Kunkel mutagensis protocol",
             "inputs": {
@@ -525,7 +525,7 @@
         },
         {
             "command_string": "python transform.py",
-            "version": "0.0.0",
+            "version": "0.0.1",
             "dependencies": [],
             "description": "Part 2 of Kunkel mutagensis protocol",
             "inputs": {
@@ -704,5 +704,5 @@
             }
         }
     ],
-    "version": "0.0.0"
+    "version": "0.0.1"
 }
