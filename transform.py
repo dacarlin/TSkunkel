@@ -55,7 +55,8 @@ def transform(protocol, params):
             agar_wells.append(agar_plate.well(i).set_name(w.name))
 
     for agar_p in agar_plates:
-        protocol.incubate(agar_p, "warm_37", "16:hour")
+        protocol.incubate( agar_p, 'warm_37', '12:hour' )
+        protocol.image_plate( agar_p, mode='top', dataref=agar_p.name )
 
     # return agar plates to end protocol
     return agar_plates
