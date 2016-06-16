@@ -1,5 +1,5 @@
 .ipynb_checkpoints/
+release*zip
 .DS_Store
 Archive.zip
 csv.csv
-make_csv.py
