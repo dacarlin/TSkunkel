@@ -12,8 +12,8 @@ def assemble(protocol, params):
     def transfer_kwargs(pre_buffer, one_tip=False, one_source=False):
         kwargs = {"one_tip": one_tip,
               "one_source": one_source,
-              "pre_buffer": "%s:microliter" % pre_buffer,
-              "blowout_buffer": True}
+              "pre_buffer": "%s:microliter" % pre_buffer }
+              #"blowout_buffer": True}
         return(kwargs)
 
     # general parameters
@@ -61,10 +61,7 @@ def assemble(protocol, params):
     kinase_oligo_plate = protocol.ref("kinase_oligo_plate_%s" % printdatetime(time=False), None, "96-pcr",
                                       discard=True)
     wells_to_kinase = kinase_oligo_plate.wells_from("A1", num_oligos)
-    protocol.transfer(kinase_mix,
-                      wells_to_kinase,
-                      "23:microliter",
-                      **transfer_kwargs(15, True, True))
+    protocol.transfer( kinase_mix, wells_to_kinase, "23:microliter", blowout_buffer=True, pre_buffer='15:microliter', one_tip=True, one_source=True )
 
     for i, oligo in enumerate(oligos):
         protocol.transfer(oligo,
@@ -75,7 +72,9 @@ def assemble(protocol, params):
                               aspirate_source=aspirate_source(depth=depth("ll_following",
                                                               lld="pressure",
                                                               distance="0.0:meter")),
-                              **transfer_kwargs(10))
+                              blowout_buffer=True,
+                              pre_buffer=11,
+                              )
 
     protocol.seal(kinase_oligo_plate)
 
@@ -96,6 +95,7 @@ def assemble(protocol, params):
                       diluted_oligo_wells,
                       "200:microliter",
                       disposal_vol="0:microliter",
+                      blowout_buffer=True,
                       **transfer_kwargs(40, True, True))
 
     for i, m in enumerate(constructs):
@@ -118,7 +118,8 @@ def assemble(protocol, params):
     protocol.transfer(ssDNA,
                       ssDNA_mix,
                       "%s:microliter" % ((num_constructs + num_rxts_plus) * 2.0 * mm_mult_ssDNA),
-                      **transfer_kwargs((num_constructs + 1) * 1))
+                      blowout_buffer=True,
+                      **transfer_kwargs( num_constructs + 1 ) )
     protocol.provision('rs17sh5rzz79ct', ssDNA_mix, "%s:microliter" % ((num_constructs + num_rxts_plus) * 0.2 * mm_mult_ssDNA))
 
     # anneal oligos
@@ -129,6 +130,7 @@ def assemble(protocol, params):
                       anneal_wells.wells,
                       "2.2:microliter",
                       dispense_speed="50:microliter/second",
+                      blowout_buffer=True,
                       **transfer_kwargs(7, True, True))
 
     for dil_oligo, reaction in zip(diluted_oligo_wells.wells, anneal_wells.wells):
@@ -140,6 +142,7 @@ def assemble(protocol, params):
                           mix_vol="2:microliter",
                           flowrate="50:microliter/second",
                           repetitions=2,
+                          blowout_buffer=True,
                           new_group=det_new_group(i),
                           **transfer_kwargs(5))
         reaction.set_name(dil_oligo.name)
@@ -171,6 +174,7 @@ def assemble(protocol, params):
                           reaction,
                           "2.2:microliter",
                           mix_after=False,
+                          blowout_buffer=True,
                           **transfer_kwargs(10))
         if 'mutant_objs' in params.keys():
             mut = next(m for m in params['mutant_objs'] if m.name == reaction.name)
