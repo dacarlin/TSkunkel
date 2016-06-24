@@ -1,5 +1,5 @@
 import math
-from modules.utils import provision_to_tube, printdatetime, det_new_group, thermocycle_ramp
+from transcriptic_utils import provision_to_tube, printdatetime, det_new_group, thermocycle_ramp
 from autoprotocol.pipette_tools import aspirate_source, depth
 
 

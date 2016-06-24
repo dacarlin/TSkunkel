@@ -1,6 +1,6 @@
 import math
 from autoprotocol import UserError
-from modules.utils import *
+from transcriptic_utils import *
 
 
 def transform(protocol, params):

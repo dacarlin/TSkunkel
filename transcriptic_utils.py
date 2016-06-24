@@ -3,17 +3,10 @@ from autoprotocol.protocol import Ref
 from autoprotocol.unit import Unit
 import datetime
 
-
 def find_named_well(name, wells):
     for w in wells.wells:
         if w.name == name:
             return w
-
-def printdatetime(time=True):
-    printdate = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
-    if not time:
-        printdate = datetime.datetime.now().strftime('%Y-%m-%d')
-    return printdate
 
 def provision_to_tube(protocol, name, tube, resource_id, volume, discard=True, storage=None):
     '''
@@ -30,12 +23,11 @@ def provision_to_tube(protocol, name, tube, resource_id, volume, discard=True, s
     protocol.provision(resource_id, dest, "%s:microliter" % volume)
     return(dest)
 
-
-def ref_kit_container(protocol, name, container, kit_id, discard=True, store=None):
+def ref_kit_container(protocol, name, container, kit_id, discard=False, store='cold_4'):
     '''
         Still in use to allow booking of agar plates on the fly
     '''
-    kit_item = Container(id, protocol.container_type(container), name=name)
+    kit_item = Container(id, protocol.container_type(container), name=name, storage=store if store else None)
     if store:
         protocol.refs[name] = Ref(name, {"reserve": kit_id, "store": {"where": store}}, kit_item)
     else:
@@ -48,6 +40,9 @@ def make_list(my_str, integer=False):
         Sometimes you need a list of a type that is not supported. This takes a string and
         comma-seperates it, returning a list of strings or integers.
     '''
+
+    # WTF is this?
+
     assert isinstance(my_str, str), "Input needs to be of type string."
     if integer:
         my_str = [int(x.strip()) for x in my_str.split(",")]
@@ -57,20 +52,14 @@ def make_list(my_str, integer=False):
 
 
 def thermocycle_ramp(start_temp, end_temp, total_duration, step_duration):
-    '''
-        Create a ramp instruction for the thermocyler. Used in annealing protocols.
-    '''
-    assert Unit.fromstring(total_duration).unit == Unit.fromstring(step_duration).unit, ("Thermocycle_ramp durations"
-                                                                                         " must be specified using the"
-                                                                                         " same unit of time.")
+    my_msg = "All durations must be in the same units" # apparently
+    assert Unit.fromstring(total_duration).unit == Unit.fromstring(step_duration).unit, my_msg
     thermocycle_steps = []
     start_temp = Unit.fromstring(start_temp).magnitude
     num_steps = int(Unit.fromstring(total_duration).magnitude // Unit.fromstring(step_duration).magnitude)
     step_size = (Unit.fromstring(end_temp).magnitude - start_temp) // num_steps
     for i in xrange(0, num_steps):
-        thermocycle_steps.append({
-            "temperature": "%d:celsius" % (start_temp + i * step_size), "duration": step_duration
-            })
+        thermocycle_steps.append({"temperature": "%d:celsius" % (start_temp + i * step_size), "duration": step_duration})
     return thermocycle_steps
 
 
@@ -93,7 +82,6 @@ def return_agar_plates(wells):
     else:
         raise ValueError("Wells has to be an integer, either 1 or 6")
     return(plates)
-
 
 def det_new_group(i, base=0):
     '''
@@ -121,3 +109,72 @@ def return_dispense_media():
              "25_ug/ml_Chloramphenicol": "lb-broth-25ug-ml-cm",
              "LB_broth": "lb-broth-noAB"}
     return(media)
+
+def scale_default(length, scale, label):
+    ok = True
+    if scale == '25nm':
+        ok = True if (length >= 15 and length <= 60) else False
+    elif scale == '100nm':
+        ok = True if (length >= 10 and length <= 90) else False
+    elif scale == '250nm':
+        ok = True if (length >= 5 and length <= 100) else False
+    elif scale == '1um':
+        ok = True if (length >= 5 and length <= 100) else False
+    else:
+        ok = False
+    if not ok:
+        raise UserError("The specified oligo '%s' is %s base pairs long."
+                           " This sequence length is invalid for the scale "
+                           "of synthesis chosen (%s)." % (label, length, scale))
+
+
+# from mutant.py
+
+from autoprotocol import UserError
+
+class Mutant(object):
+
+        unique_mutants = {}
+
+        def __init__(self, name, oligos=None, seq_primers=None):
+            if name in Mutant.unique_mutants:
+                raise UserError("You must specify unique mutant names for"
+                                " your constructs. %s has already been used." % name)
+            self.oligos = oligos or []
+            self.name = name
+            self.seq_primers = seq_primers or []
+            self.growth_wells = []
+            Mutant.unique_mutants[self.name] = self
+
+        def add_seq_primers(self, seq_primers):
+            if type(seq_primers) is list:
+                self.seq_primers.extend(seq_primers)
+            else:
+                self.seq_primers.append(seq_primers)
+
+        def add_oligos(self, oligos):
+            if type(oligos) is list:
+                self.oligos.extend(oligos)
+            else:
+                self.oligos.append(oligos)
+
+        def add_growth_wells(self, growth_wells):
+            if type(growth_wells) is list:
+                self.growth_wells.extend(growth_wells)
+            else:
+                self.growth_wells.append(growth_wells)
+
+
+def provision_reagents(reagents, dest, num_rxts, mm_mult=1.3, num_rxts_plus=3.0):
+    for reagent in reagents.values():
+        protocol.provision(reagent['resource_id'], dest, "%s:microliter" % ((num_rxts + num_rxts_plus) * reagent['reagent_ratio'] * mm_mult))
+
+def transfer_kwargs(pre_buffer, one_tip=False, one_source=False):
+
+    kwargs = {
+        "pre_buffer": "%s:microliter" % pre_buffer,
+        "one_tip": one_tip,
+        "one_source": one_source,
+    }
+
+    return(kwargs)
