@@ -35,7 +35,7 @@ def ref_kit_container(protocol, name, container, kit_id, discard=True, store=Non
     '''
         Still in use to allow booking of agar plates on the fly
     '''
-    kit_item = Container(id, protocol.container_type(container), name=name)
+    kit_item = Container(id, protocol.container_type(container), name=name, storage=store if store else None)
     if store:
         protocol.refs[name] = Ref(name, {"reserve": kit_id, "store": {"where": store}}, kit_item)
     else:
