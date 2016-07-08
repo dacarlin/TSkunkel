@@ -20,12 +20,14 @@ transcriptic preview Kunkel
 
 If you create a new version of the protocol:
 
-+ bump the version numbers in the manifest
-+ create a zip of the repo 
-+ upload to `secure.transcriptic.com`
-+ validate, and publish 
+```bash 
+transcriptic build-release Kunkel 
+transcriptic upload-release Kunkel <my_project_name>
+```
 
-Then, you can launch runs: Launch a Run > Kunkel. The run requires you enter 
+(see `transcriptic --help` for more). Then, follow the link to publish the protocol on Transcriptic's website. 
+
+Then, you can launch runs: Launch a Run > Organization > Kunkel. The run requires you enter 
 
 1. an aliquot of ssDNA 
 2. antibiotic resistance 
