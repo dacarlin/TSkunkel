@@ -6,7 +6,7 @@
 + Ben Miles, Transcriptic
 + Alex Carlin, University of California, Davis 
 
-## Command-line usage
+## Use
 
 To run the protocol, first install the Autoprotocol package and the Transcriptic command line utility, 
 and a preview of the protocol. You must be in the repo working directory for this to work. 
@@ -15,8 +15,6 @@ and a preview of the protocol. You must be in the repo working directory for thi
 pip install autoprotocol transcriptic
 transcriptic preview Kunkel 
 ```
-
-## Using the web interface 
 
 If you create a new version of the protocol:
 
