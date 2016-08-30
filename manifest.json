@@ -5,7 +5,7 @@
     {
       "name": "single_kunkel",
       "version": "0.0.1",
-      "display_name": "Sample Protocol #5", 
+      "display_name": "Kunkel optimized for single mutants", 
       "description": "This is a sample protocol.",
       "command_string": "python single_kunkel.py",
       "inputs": {},
