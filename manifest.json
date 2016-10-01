@@ -1,14 +1,19 @@
 {
   "format": "python",
   "license": "MIT",
+  "version": "0.0.1",
   "protocols": [
     {
-      "name": "single_kunkel",
+      "name": "singlekunkel",
       "version": "0.0.1",
-      "display_name": "Kunkel optimized for single mutants", 
-      "description": "This is a sample protocol.",
-      "command_string": "python single_kunkel.py",
-      "inputs": {},
+      "display_name": "Kunkel for single mutants", 
+      "description": "Kunkel optimized for single mutants (min: 24, max: 96)",
+      "command_string": "python singlekunkel.py",
+      "inputs": {
+        "dummy": {
+          "type": "aliquot" 
+        }
+      },
       "preview": {
         "refs":{},
         "parameters": {}

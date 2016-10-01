@@ -3,7 +3,7 @@ from autoprotocol.container import Container
 from autoprotocol.protocol import Ref
 import pandas
 
-def single_kunkel( p, params ):
+def singlekunkel( p, params ):
 
     # before running this protocol
     # transform your plasmid into CJ236
@@ -108,4 +108,4 @@ def single_kunkel( p, params ):
 
 if __name__ == '__main__':
     from autoprotocol.harness import run
-    run( single_kunkel, 'single_kunkel' )
+    run( singlekunkel, 'singlekunkel' )
