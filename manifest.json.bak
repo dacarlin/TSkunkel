@@ -1,0 +1,708 @@
+{
+    "format": "python",
+    "license": "MIT",
+    "protocols": [
+        {
+            "command_string": "python kunkel.py",
+            "dependencies": [],
+            "description": "Kunkel mutagensis (requires aliquot of prepped ssDNA)",
+            "inputs": {
+                "construct_setup": {
+                    "description": "Input parameters",
+                    "inputs": {
+                        "growth_media": {
+                            "default": "lb-broth-50ug-ml-kan",
+                            "description": "Antibiotic use for selection",
+                            "label": "Antibiotic",
+                            "options": [
+                                {
+                                    "name": "Ampicillin",
+                                    "value": "lb-broth-100ug-ml-amp"
+                                },
+                                {
+                                    "name": "Kanamycin",
+                                    "value": "lb-broth-50ug-ml-kan"
+                                },
+                                {
+                                    "name": "Spectinomycin",
+                                    "value": "lb-broth-100ug-ml-specto"
+                                }
+                            ],
+                            "type": "choice"
+                        },
+                        "mutant_upload": {
+                            "description": "Upload a CSV",
+                            "label": "Mutant constructs",
+                            "template": {
+                                "header": [
+                                    "mutant_label",
+                                    "oligo_label",
+                                    "sequence",
+                                    "scale",
+                                    "purification"
+                                ],
+                                "label": "Upload CSV",
+                                "rows": [
+                                    [
+                                        "mutant_1",
+                                        "oligo_1",
+                                        "atatatatatatatatatatatatatata",
+                                        "25nm",
+                                        "standard"
+                                    ],
+                                    [
+                                        "mutant_1",
+                                        "oligo_2",
+                                        "gggatatatatatatatatatatatatat",
+                                        "25nm",
+                                        "standard"
+                                    ],
+                                    [
+                                        "mutant_1",
+                                        "oligo_3",
+                                        "ggctgatatatatatatatatatatatata",
+                                        "25nm",
+                                        "standard"
+                                    ],
+                                    [
+                                        "mutant_2",
+                                        "oligo_3",
+                                        "ggctgatatatatatatatatatatatata",
+                                        "25nm",
+                                        "standard"
+                                    ]
+                                ]
+                            },
+                            "type": "csv"
+                        },
+                        "ssDNA": {
+                            "label": "ssDNA",
+                            "type": "aliquot"
+                        }
+                    },
+                    "label": "Construct parameters",
+                    "type": "group"
+                }
+            },
+            "name": "Kunkel",
+            "preview": {
+                "parameters": {
+                    "construct_setup": {
+                        "growth_media": "lb-broth-100ug-ml-specto",
+                        "mutant_upload": [
+                            {
+                                "mutant_label": "mutant_1",
+                                "oligo_label": "oligo_1",
+                                "purification": "standard",
+                                "scale": "25nm",
+                                "sequence": "agagagagagagagagagagagagagagag"
+                            },
+                            {
+                                "mutant_label": "mutant_1",
+                                "oligo_label": "oligo_2",
+                                "purification": "standard",
+                                "scale": "25nm",
+                                "sequence": "agagagagagagagagagagagagagagagtt"
+                            },
+                            {
+                                "mutant_label": "mutant_2",
+                                "oligo_label": "oligo_2",
+                                "purification": "standard",
+                                "scale": "25nm",
+                                "sequence": "agagagagagagagagagagagagagagagtt"
+                            }
+                        ],
+                        "ssDNA": "ssDNA_source/0"
+                    }
+                },
+                "refs": {
+                    "ssDNA_source": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "1000:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    }
+                }
+            },
+            "version": "0.0.4"
+        },
+        {
+            "command_string": "python assemble.py",
+            "version": "0.0.4",
+            "dependencies": [],
+            "description": "Part 1 of Kunkel mutagensis protocol",
+            "inputs": {
+                "constructs": {
+                    "inputs": {
+                        "mutant_name": {
+                            "label": "Construct Name (required)",
+                            "type": "string"
+                        },
+                        "oligos": {
+                            "label": "Mutation Containing Oligo(s)",
+                            "type": "aliquot+"
+                        }
+                    },
+                    "type": "group+"
+                },
+                "ssDNA": {
+                    "label": "ssDNA",
+                    "type": "aliquot"
+                }
+            },
+            "name": "Assemble",
+            "preview": {
+                "parameters": {
+                    "constructs": [
+                        {
+                            "mutant_name": "mutant_1",
+                            "oligos": [
+                                "oligo_1/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_2",
+                            "oligos": [
+                                "oligo_2/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_3",
+                            "oligos": [
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_8",
+                            "oligos": [
+                                "oligo_4/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_4",
+                            "oligos": [
+                                "oligo_1/0",
+                                "oligo_2/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_5",
+                            "oligos": [
+                                "oligo_1/0",
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_6",
+                            "oligos": [
+                                "oligo_2/0",
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_7",
+                            "oligos": [
+                                "oligo_1/0",
+                                "oligo_2/0",
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_9",
+                            "oligos": [
+                                "oligo_4/0",
+                                "oligo_5/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_10",
+                            "oligos": [
+                                "oligo_4/0",
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_11",
+                            "oligos": [
+                                "oligo_6/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_12",
+                            "oligos": [
+                                "oligo_7/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_13",
+                            "oligos": [
+                                "oligo_8/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_14",
+                            "oligos": [
+                                "oligo_9/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_15",
+                            "oligos": [
+                                "oligo_10/0",
+                                "oligo_11/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_16",
+                            "oligos": [
+                                "oligo_10/0",
+                                "oligo_9/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_17",
+                            "oligos": [
+                                "oligo_2/0",
+                                "oligo_7/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_18",
+                            "oligos": [
+                                "oligo_9/0",
+                                "oligo_11/0",
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_19",
+                            "oligos": [
+                                "oligo_8/0",
+                                "oligo_5/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_20",
+                            "oligos": [
+                                "oligo_8/0",
+                                "oligo_3/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_21",
+                            "oligos": [
+                                "oligo_12/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_22",
+                            "oligos": [
+                                "oligo_13/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_23",
+                            "oligos": [
+                                "oligo_15/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_24",
+                            "oligos": [
+                                "oligo_14/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_25",
+                            "oligos": [
+                                "oligo_14/0",
+                                "oligo_15/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_26",
+                            "oligos": [
+                                "oligo_12/0",
+                                "oligo_13/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_27",
+                            "oligos": [
+                                "oligo_10/0",
+                                "oligo_12/0",
+                                "oligo_13/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_28",
+                            "oligos": [
+                                "oligo_15/0",
+                                "oligo_8/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_29",
+                            "oligos": [
+                                "oligo_14/0",
+                                "oligo_7/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_30",
+                            "oligos": [
+                                "oligo_12/0",
+                                "oligo_4/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_31",
+                            "oligos": [
+                                "oligo_15/0",
+                                "oligo_5/0"
+                            ]
+                        },
+                        {
+                            "mutant_name": "mutant_32",
+                            "oligos": [
+                                "oligo_13/0",
+                                "oligo_6/0"
+                            ]
+                        }
+                    ],
+                    "ssDNA": "ssDNA_source/0"
+                },
+                "refs": {
+                    "oligo_1": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_10": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_11": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_12": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_13": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_14": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_15": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_2": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_3": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_4": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_5": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_6": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_7": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_8": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "oligo_9": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "100:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    },
+                    "ssDNA_source": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "1000:microliter"
+                            }
+                        },
+                        "store": "cold_20",
+                        "type": "micro-2.0"
+                    }
+                }
+            }
+        },
+        {
+            "command_string": "python transform.py",
+            "version": "0.0.4",
+            "dependencies": [],
+            "description": "Part 2 of Kunkel mutagensis protocol",
+            "inputs": {
+                "constructs": {
+                    "label": "Samples to Transform and Grow using Zymo 10B Competent Cells",
+                    "type": "aliquot+"
+                },
+                "growth_media": {
+                    "default": "lb-broth-100ug-ml-amp",
+                    "description": "Antibiotic to add to growth media and agar.",
+                    "label": "Antibiotic Resistance",
+                    "options": [
+                        {
+                            "name": "Ampicillin",
+                            "value": "lb-broth-100ug-ml-amp"
+                        },
+                        {
+                            "name": "Kanamycin",
+                            "value": "lb-broth-50ug-ml-kan"
+                        },
+                        {
+                            "name": "Chloroamphenicol",
+                            "value": "lb-broth-25ug-ml-cm"
+                        },
+                        {
+                            "name": "Spectinomycin",
+                            "value": "lb-broth-100ug-ml-specto"
+                        }
+                    ],
+                    "type": "choice"
+                }
+            },
+            "name": "Transform",
+            "preview": {
+                "parameters": {
+                    "constructs": [
+                        "construct_aliquots/0",
+                        "construct_aliquots/1",
+                        "construct_aliquots/2",
+                        "construct_aliquots/3",
+                        "construct_aliquots/4",
+                        "construct_aliquots/5",
+                        "construct_aliquots/6",
+                        "construct_aliquots/7",
+                        "construct_aliquots/8",
+                        "construct_aliquots/9",
+                        "construct_aliquots/10",
+                        "construct_aliquots/11",
+                        "construct_aliquots/12",
+                        "construct_aliquots/13",
+                        "construct_aliquots/14",
+                        "construct_aliquots/15",
+                        "construct_aliquots/16",
+                        "construct_aliquots/17",
+                        "construct_aliquots/18",
+                        "construct_aliquots/19",
+                        "construct_aliquots/20",
+                        "construct_aliquots/21",
+                        "construct_aliquots/22",
+                        "construct_aliquots/23",
+                        "construct_aliquots/24",
+                        "construct_aliquots/25",
+                        "construct_aliquots/26",
+                        "construct_aliquots/27",
+                        "construct_aliquots/28",
+                        "construct_aliquots/29",
+                        "construct_aliquots/30",
+                        "construct_aliquots/31"
+                    ],
+                    "growth_media": "lb-broth-100ug-ml-specto"
+                },
+                "refs": {
+                    "construct_aliquots": {
+                        "aliquots": {
+                            "0": {
+                                "volume": "6:microliter"
+                            },
+                            "1": {
+                                "volume": "6:microliter"
+                            },
+                            "10": {
+                                "volume": "6:microliter"
+                            },
+                            "11": {
+                                "volume": "6:microliter"
+                            },
+                            "12": {
+                                "volume": "6:microliter"
+                            },
+                            "13": {
+                                "volume": "6:microliter"
+                            },
+                            "14": {
+                                "volume": "6:microliter"
+                            },
+                            "15": {
+                                "volume": "6:microliter"
+                            },
+                            "16": {
+                                "volume": "6:microliter"
+                            },
+                            "17": {
+                                "volume": "6:microliter"
+                            },
+                            "18": {
+                                "volume": "6:microliter"
+                            },
+                            "19": {
+                                "volume": "6:microliter"
+                            },
+                            "2": {
+                                "volume": "6:microliter"
+                            },
+                            "20": {
+                                "volume": "6:microliter"
+                            },
+                            "21": {
+                                "volume": "6:microliter"
+                            },
+                            "22": {
+                                "volume": "6:microliter"
+                            },
+                            "23": {
+                                "volume": "6:microliter"
+                            },
+                            "24": {
+                                "volume": "6:microliter"
+                            },
+                            "25": {
+                                "volume": "6:microliter"
+                            },
+                            "26": {
+                                "volume": "6:microliter"
+                            },
+                            "27": {
+                                "volume": "6:microliter"
+                            },
+                            "28": {
+                                "volume": "6:microliter"
+                            },
+                            "29": {
+                                "volume": "6:microliter"
+                            },
+                            "3": {
+                                "volume": "6:microliter"
+                            },
+                            "30": {
+                                "volume": "6:microliter"
+                            },
+                            "31": {
+                                "volume": "6:microliter"
+                            },
+                            "4": {
+                                "volume": "6:microliter"
+                            },
+                            "5": {
+                                "volume": "6:microliter"
+                            },
+                            "6": {
+                                "volume": "6:microliter"
+                            },
+                            "7": {
+                                "volume": "6:microliter"
+                            },
+                            "8": {
+                                "volume": "6:microliter"
+                            },
+                            "9": {
+                                "volume": "6:microliter"
+                            }
+                        },
+                        "store": "cold_4",
+                        "type": "384-pcr"
+                    }
+                }
+            }
+        }
+    ],
+    "version": "0.0.4"
+}
