@@ -38,7 +38,7 @@ def transform(protocol, params):
     protocol.unseal(transformation_plate)
     protocol.dispense_full_plate( transformation_plate, 'soc', '50:microliter' )
     protocol.seal(transformation_plate)
-    protocol.incubate(transformation_plate, "warm_37", "10:minute", shaking=True)
+    protocol.incubate(transformation_plate, "warm_37", "60:minute", shaking=True)
     protocol.unseal(transformation_plate)
 
     agar_plates = []
